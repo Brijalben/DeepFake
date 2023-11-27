@@ -1,7 +1,7 @@
 import dill
 
 # Load the model
-with open('model.pkl', 'rb') as file:
+with open('model/model.pkl', 'rb') as file:
     model = dill.load(file)
 
 from flask import Flask, request, jsonify
