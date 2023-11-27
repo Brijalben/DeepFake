@@ -1,12 +1,15 @@
 import dill
+from flask import Flask, request, jsonify
+
+app = Flask(__name__, template_folder = 'template')
 
 # Load the model
 with open('model.pkl', 'rb') as file:
     model = dill.load(file)
-
-from flask import Flask, request, jsonify
-
-app = Flask(__name__, template_folder = 'template')
+    
+@app.route('/')
+def index():
+    return render_template('main.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
