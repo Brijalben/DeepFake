@@ -1,7 +1,15 @@
-<input type="file" accept="image/*" id="imageUpload">
-<button id="predictButton">Predict</button>
-<div id="imageDisplay"></div>
-<div id="result"></div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DeepFake Image Detection System</title>
+</head>
+<body>
+        <form action="/predict" method="post">
+             <input type="file" accept="image/*" id="imageUpload">
+             <button id="predictButton">Predict</button>
+             <div id="imageDisplay"></div>
+             <div id="result"></div>
+        </form>
 
 <script>
 document.getElementById('imageUpload').addEventListener('change', function(event) {
@@ -40,3 +48,5 @@ document.getElementById('predictButton').addEventListener('click', function() {
     }
 });
 </script>
+</body>
+</html>
