@@ -10,6 +10,14 @@
              <div id="imageDisplay"></div>
              <div id="result"></div>
         </form>
+        <div class="output">
+            {% if prediction is defined %}
+                {% if prediction == 0 %}
+                    <p>Image is real.</p>
+                {% else %}
+                <p>Fake image</p>
+                {% endif %}
+        </div>
 
 <script>
 document.getElementById('imageUpload').addEventListener('change', function(event) {
