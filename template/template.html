@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DeepFake Image Detection System</title>
+</head>
+<body>
+        <form action="/predict" method="post">
+             <input type="file" accept="image/*" id="imageUpload">
+             <button id="predictButton">Predict</button>
+             <div id="imageDisplay"></div>
+             <div id="result"></div>
+        </form>
+        <div class="output">
+            {% if prediction is defined %}
+                {% if prediction == 0 %}
+                    <p>Image is real.</p>
+                {% else %}
+                <p>Fake image</p>
+                {% endif %}
+        </div>
+
+<script>
+document.getElementById('imageUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+
+    // Display the uploaded image
+    const imageDisplay = document.getElementById('imageDisplay');
+    imageDisplay.innerHTML = `<img src="${imageUrl}" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;">`;
+});
+
+document.getElementById('predictButton').addEventListener('click', function() {
+    const fileInput = document.getElementById('imageUpload');
+    const file = fileInput.files[0];
+
+    if (file) {
+        // Create a FormData object and append the file to it
+        const formData = new FormData();
+        formData.append('image', file);
+
+        // Make a POST request to your backend API
+        fetch('/predict_image', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display the prediction result
+            document.getElementById('result').innerText = `Prediction: ${data.prediction}`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    } else {
+        alert('Please select an image file.');
+    }
+});
+</script>
+</body>
+</html>
